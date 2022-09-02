@@ -1,5 +1,7 @@
 import { USER_ROLE } from "src/common/enum";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Comment } from "src/modules/comments/entities/comment.entity";
+import { Trailer } from "src/modules/trailers/entities/trailer.entity";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -26,5 +28,11 @@ export class User {
 
     @Column()
     password: string;
+
+    @OneToMany(() => Comment, (comment) => comment.user)
+    comments: Comment[];
+
+    @ManyToMany(() => Trailer)
+    trailers: Trailer[];
 
 }
