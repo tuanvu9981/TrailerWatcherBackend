@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import databaseConfig from './config/database.config';
 import { DatabaseModule } from './database/database.module';
 import { ActorModule } from './modules/actors/actor.module';
+import { CommentModule } from './modules/comments/comment.module';
 
 @Module({
   imports: [
@@ -14,7 +15,9 @@ import { ActorModule } from './modules/actors/actor.module';
       ]
     }),
     DatabaseModule,
-    ActorModule
+
+    ActorModule,
+    CommentModule
   ],
   controllers: [],
   providers: [],
