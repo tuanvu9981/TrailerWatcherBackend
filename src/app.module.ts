@@ -1,21 +1,20 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Genre } from './modules/genres/entities/genre.entity';
-import { User } from './modules/users/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
+import databaseConfig from './config/database.config';
+import { DatabaseModule } from './database/database.module';
+import { ActorModule } from './modules/actors/actor.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: '',
-      password: '',
-      database: '',
-      entities: [User, Genre],
-      synchronize: true
-      // Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: 'src/.env/dev.env',
+      load: [
+        databaseConfig
+      ]
     }),
+    DatabaseModule,
+    ActorModule
   ],
   controllers: [],
   providers: [],
