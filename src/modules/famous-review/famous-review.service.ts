@@ -1,26 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFamousReviewDto } from './dto/create-famous-review.dto';
-import { UpdateFamousReviewDto } from './dto/update-famous-review.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { FamousReviewDto } from './dto/famous-review.dto';
+import { FamousReview } from './entities/famous-review.entity';
 
 @Injectable()
 export class FamousReviewService {
-  create(createFamousReviewDto: CreateFamousReviewDto) {
-    return 'This action adds a new famousReview';
+  constructor(
+    @InjectRepository(FamousReview)
+    private repository: Repository<FamousReview>
+  ) { }
+
+  async create(dto: FamousReviewDto): Promise<FamousReview> {
+    const newDocument = this.repository.create(dto);
+    return this.repository.save(newDocument);
   }
 
-  findAll() {
-    return `This action returns all famousReview`;
+  async findAll(): Promise<FamousReview[]> {
+    return this.repository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} famousReview`;
+  async findOne(id: number): Promise<FamousReview> {
+    return await this.repository.findOneBy({ id });
   }
 
-  update(id: number, updateFamousReviewDto: UpdateFamousReviewDto) {
-    return `This action updates a #${id} famousReview`;
+  async update(id: number, newDto: FamousReviewDto): Promise<FamousReview> {
+    await this.repository.update(id, newDto);
+    return await this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} famousReview`;
+  async remove(id: number): Promise<void> {
+    await this.repository.delete(id);
   }
 }

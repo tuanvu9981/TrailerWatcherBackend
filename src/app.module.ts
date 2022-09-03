@@ -5,6 +5,7 @@ import { DatabaseModule } from './database/database.module';
 import { ActorModule } from './modules/actors/actor.module';
 import { CommentModule } from './modules/comments/comment.module';
 import { DirectorModule } from './modules/directors/director.module';
+import { FamousReviewModule } from './modules/famous-review/famous-review.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { DirectorModule } from './modules/directors/director.module';
 
     ActorModule,
     CommentModule,
-    DirectorModule
+    DirectorModule,
+    FamousReviewModule
   ],
   controllers: [],
   providers: [],

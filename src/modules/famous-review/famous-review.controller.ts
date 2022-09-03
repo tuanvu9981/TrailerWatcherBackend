@@ -1,34 +1,50 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { FamousReviewDto } from './dto/famous-review.dto';
+import { FamousReview } from './entities/famous-review.entity';
 import { FamousReviewService } from './famous-review.service';
-import { CreateFamousReviewDto } from './dto/create-famous-review.dto';
-import { UpdateFamousReviewDto } from './dto/update-famous-review.dto';
 
 @Controller('famous-review')
 export class FamousReviewController {
-  constructor(private readonly famousReviewService: FamousReviewService) {}
+  constructor(
+    private readonly service: FamousReviewService
+  ) { }
 
   @Post()
-  create(@Body() createFamousReviewDto: CreateFamousReviewDto) {
-    return this.famousReviewService.create(createFamousReviewDto);
+  async create(
+    @Body()
+    dto: FamousReviewDto
+  ): Promise<FamousReview> {
+    return await this.service.create(dto);
   }
 
   @Get()
-  findAll() {
-    return this.famousReviewService.findAll();
+  async findAll(): Promise<FamousReview[]> {
+    return await this.service.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.famousReviewService.findOne(+id);
+  async findOne(
+    @Param('id')
+    id: string
+  ): Promise<FamousReview> {
+    return this.service.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFamousReviewDto: UpdateFamousReviewDto) {
-    return this.famousReviewService.update(+id, updateFamousReviewDto);
+  @Put(':id')
+  async update(
+    @Param('id')
+    id: string,
+
+    @Body()
+    newDto: FamousReviewDto
+  ): Promise<FamousReview> {
+    return this.service.update(+id, newDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.famousReviewService.remove(+id);
+  async remove(
+    @Param('id') id: string
+  ) {
+    return this.service.remove(+id);
   }
 }
