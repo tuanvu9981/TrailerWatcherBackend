@@ -4,6 +4,7 @@ import databaseConfig from './config/database.config';
 import { DatabaseModule } from './database/database.module';
 import { ActorModule } from './modules/actors/actor.module';
 import { CommentModule } from './modules/comments/comment.module';
+import { DirectorModule } from './modules/directors/director.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { CommentModule } from './modules/comments/comment.module';
     DatabaseModule,
 
     ActorModule,
-    CommentModule
+    CommentModule,
+    DirectorModule
   ],
   controllers: [],
   providers: [],
