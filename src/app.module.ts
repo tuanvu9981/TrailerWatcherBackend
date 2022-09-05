@@ -8,6 +8,7 @@ import { DirectorModule } from './modules/directors/director.module';
 import { FamousReviewModule } from './modules/famous-review/famous-review.module';
 import { GenresModule } from './modules/genres/genre.module';
 import { ReleaseInfoModule } from './modules/release-info/release-info.module';
+import { TrailersModule } from './modules/trailers/trailer.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { ReleaseInfoModule } from './modules/release-info/release-info.module';
     DirectorModule,
     FamousReviewModule,
     GenresModule,
-    ReleaseInfoModule
+    ReleaseInfoModule,
+    TrailersModule,
   ],
   controllers: [],
   providers: [],
