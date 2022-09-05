@@ -11,3 +11,4 @@
   - [Entities and types](https://typeorm.io/entities)
   - [Solid in Viblo](https://viblo.asia/p/nestjs-xay-dung-project-tich-hop-typeorm-repository-pattern-Eb85o9VBZ2G)
   - [Github with typeORM](https://github.com/hoangtm1601/nest-base)
+  - **synchronize:true** will auto create tables, including many-to-many relation(s)

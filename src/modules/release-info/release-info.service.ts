@@ -1,26 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { CreateReleaseInfoDto } from './dto/create-release-info.dto';
-import { UpdateReleaseInfoDto } from './dto/update-release-info.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { BaseService } from 'src/interface/base.service';
+import { Repository } from 'typeorm';
+import { ReleaseInfo } from './entities/release-info.entity';
 
 @Injectable()
-export class ReleaseInfoService {
-  create(createReleaseInfoDto: CreateReleaseInfoDto) {
-    return 'This action adds a new releaseInfo';
-  }
+export class ReleaseInfoService extends BaseService<ReleaseInfo>{
 
-  findAll() {
-    return `This action returns all releaseInfo`;
+  constructor(
+    @InjectRepository(ReleaseInfo)
+    protected repository: Repository<ReleaseInfo>
+  ){
+    super();
+    this.repository = repository;
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} releaseInfo`;
-  }
-
-  update(id: number, updateReleaseInfoDto: UpdateReleaseInfoDto) {
-    return `This action updates a #${id} releaseInfo`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} releaseInfo`;
+  
+  async findOne(id: number): Promise<ReleaseInfo> {
+    return await this.repository.findOneBy({ id });
   }
 }

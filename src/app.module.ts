@@ -7,6 +7,7 @@ import { CommentModule } from './modules/comments/comment.module';
 import { DirectorModule } from './modules/directors/director.module';
 import { FamousReviewModule } from './modules/famous-review/famous-review.module';
 import { GenresModule } from './modules/genres/genre.module';
+import { ReleaseInfoModule } from './modules/release-info/release-info.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { GenresModule } from './modules/genres/genre.module';
     CommentModule,
     DirectorModule,
     FamousReviewModule,
-    GenresModule
+    GenresModule,
+    ReleaseInfoModule
   ],
   controllers: [],
   providers: [],

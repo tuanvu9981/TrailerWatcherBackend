@@ -1,34 +1,52 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { ReleaseInfoDto } from './dto/create-release-info.dto';
+import { ReleaseInfo } from './entities/release-info.entity';
 import { ReleaseInfoService } from './release-info.service';
-import { CreateReleaseInfoDto } from './dto/create-release-info.dto';
-import { UpdateReleaseInfoDto } from './dto/update-release-info.dto';
 
 @Controller('release-info')
 export class ReleaseInfoController {
-  constructor(private readonly releaseInfoService: ReleaseInfoService) {}
+  constructor(
+    private readonly service: ReleaseInfoService
+  ) { }
 
   @Post()
-  create(@Body() createReleaseInfoDto: CreateReleaseInfoDto) {
-    return this.releaseInfoService.create(createReleaseInfoDto);
+  async create(
+    @Body()
+    dto: ReleaseInfoDto
+  ): Promise<ReleaseInfo> {
+    return await this.service.create(dto);
   }
 
   @Get()
-  findAll() {
-    return this.releaseInfoService.findAll();
+  async findAll(): Promise<ReleaseInfo[]> {
+    return await this.service.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.releaseInfoService.findOne(+id);
+  async findOne(
+    @Param('id')
+    id: string
+  ): Promise<ReleaseInfo> {
+    return await this.service.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReleaseInfoDto: UpdateReleaseInfoDto) {
-    return this.releaseInfoService.update(+id, updateReleaseInfoDto);
+  @Put(':id')
+  async update(
+    @Param('id')
+    id: string,
+
+    @Body()
+    newDto: ReleaseInfoDto
+  ): Promise<ReleaseInfo> {
+    await this.service.update(+id, newDto);
+    return await this.service.findOne(+id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.releaseInfoService.remove(+id);
+  async remove(
+    @Param('id')
+    id: string
+  ): Promise<void> {
+    return await this.service.remove(+id);
   }
 }
