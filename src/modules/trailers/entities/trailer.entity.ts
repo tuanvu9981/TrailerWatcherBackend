@@ -1,9 +1,16 @@
-import { Actor } from "src/modules/actors/entities/actor.entity";
-import { Director } from "src/modules/directors/entities/director.entity";
 import { ReleaseInfo } from "src/modules/release-info/entities/release-info.entity";
 import { Comment } from "src/modules/comments/entities/comment.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Genre } from "src/modules/genres/entities/genre.entity";
+import { 
+    Column, 
+    Entity, 
+    JoinColumn, 
+    JoinTable, 
+    ManyToMany, 
+    OneToMany, 
+    OneToOne, 
+    PrimaryGeneratedColumn 
+} from "typeorm";
 
 @Entity()
 export class Trailer {
@@ -32,17 +39,11 @@ export class Trailer {
     @JoinColumn()
     releaseInfo: ReleaseInfo;
 
-    @OneToMany(()=> Actor, (actor) => actor.trailer)
-    actors: Actor[];
-
-    @OneToMany(()=> Director, (director) => director.trailer)
-    directors: Director[];
-
     @OneToMany(() => Comment, (comment) => comment.trailer)
     comments: Comment[];
 
     @ManyToMany(() => Genre)
     @JoinTable()
-    genres: Genre[];
+    has: Genre[];
 
 }

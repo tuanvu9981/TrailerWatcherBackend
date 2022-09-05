@@ -1,5 +1,5 @@
 import { Trailer } from "src/modules/trailers/entities/trailer.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Director {
@@ -12,6 +12,7 @@ export class Director {
     @Column()
     imageUrl: string;
 
-    @ManyToOne(() => Trailer, (trailer) => trailer.directors)
-    trailer: Trailer;
+    @ManyToMany(() => Trailer)
+    @JoinTable()
+    manageIn: Trailer[]
 }

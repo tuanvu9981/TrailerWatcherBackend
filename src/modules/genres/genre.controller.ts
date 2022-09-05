@@ -1,24 +1,24 @@
 import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
-import { DirectorService } from './director.service';
-import { DirectorDto } from './dto/director.dto';
-import { Director } from './entities/director.entity';
+import { GenreDto } from './dto/genre.dto';
+import { Genre } from './entities/genre.entity';
+import { GenreService } from './genre.service';
 
-@Controller('directors')
-export class DirectorController {
+@Controller('genres')
+export class GenreController {
   constructor(
-    private readonly service: DirectorService
+    private readonly service: GenreService
   ) { }
 
   @Post()
   async create(
     @Body()
-    dto: DirectorDto
-  ): Promise<Director> {
+    dto: GenreDto
+  ): Promise<Genre> {
     return await this.service.create(dto);
   }
 
   @Get()
-  async findAll(): Promise<Director[]> {
+  async findAll(): Promise<Genre[]> {
     return await this.service.findAll();
   }
 
@@ -26,7 +26,7 @@ export class DirectorController {
   async findOne(
     @Param('id')
     id: string
-  ): Promise<Director> {
+  ): Promise<Genre> {
     return await this.service.findOne(+id);
   }
 
@@ -36,16 +36,17 @@ export class DirectorController {
     id: string,
 
     @Body()
-    newDto: DirectorDto
-  ): Promise<Director> {
+    newDto: GenreDto
+  ): Promise<Genre> {
     await this.service.update(+id, newDto);
     return await this.service.findOne(+id);
   }
 
   @Delete(':id')
   async remove(
-    @Param('id') id: string
-  ) {
-    return this.service.remove(+id);
+    @Param('id')
+    id: string
+  ): Promise<void> {
+    return await this.service.remove(+id);
   }
 }

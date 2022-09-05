@@ -6,6 +6,7 @@ import { ActorModule } from './modules/actors/actor.module';
 import { CommentModule } from './modules/comments/comment.module';
 import { DirectorModule } from './modules/directors/director.module';
 import { FamousReviewModule } from './modules/famous-review/famous-review.module';
+import { GenresModule } from './modules/genres/genre.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { FamousReviewModule } from './modules/famous-review/famous-review.module
     ActorModule,
     CommentModule,
     DirectorModule,
-    FamousReviewModule
+    FamousReviewModule,
+    GenresModule
   ],
   controllers: [],
   providers: [],

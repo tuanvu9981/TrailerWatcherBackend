@@ -1,7 +1,7 @@
 import { USER_ROLE } from "src/common/enum";
 import { Comment } from "src/modules/comments/entities/comment.entity";
 import { Trailer } from "src/modules/trailers/entities/trailer.entity";
-import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -33,6 +33,7 @@ export class User {
     comments: Comment[];
 
     @ManyToMany(() => Trailer)
-    trailers: Trailer[];
+    @JoinTable()
+    interactWith: Trailer[];
 
 }

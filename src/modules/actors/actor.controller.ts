@@ -27,7 +27,7 @@ export class ActorController {
     @Param('id')
     id: string
   ): Promise<Actor> {
-    return this.service.findOne(+id);
+    return await this.service.findOne(+id);
   }
 
   @Put(':id')
@@ -38,13 +38,14 @@ export class ActorController {
     @Body()
     newDto: ActorDto
   ): Promise<Actor> {
-    return this.service.update(+id, newDto);
+    await this.service.update(+id, newDto);
+    return await this.service.findOne(+id);
   }
 
   @Delete(':id')
   async remove(
     @Param('id') id: string
   ) {
-    return this.service.remove(+id);
+    return await this.service.remove(+id);
   }
 }

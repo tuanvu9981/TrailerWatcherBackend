@@ -29,11 +29,15 @@ import { Actor } from "src/modules/actors/entities/actor.entity";
                     FamousReview,
                     ReleaseInfo,
                     Director,
-                    Actor                    
+                    Actor
                 ],
+                // ssl: {
+                //     rejectUnauthorized: false,
+                // },
+                synchronize: true,
             }),
             inject: [ConfigService]
         })
     ]
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

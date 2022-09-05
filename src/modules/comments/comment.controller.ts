@@ -27,7 +27,7 @@ export class CommentController {
     @Param('id')
     id: string
   ): Promise<Comment> {
-    return this.service.findOne(+id);
+    return await this.service.findOne(+id);
   }
 
   @Put(':id')
@@ -38,7 +38,8 @@ export class CommentController {
     @Body()
     newDto: CommentDto
   ): Promise<Comment> {
-    return this.service.update(+id, newDto);
+    await this.service.update(+id, newDto);
+    return await this.service.findOne(+id);
   }
 
   @Delete(':id')
