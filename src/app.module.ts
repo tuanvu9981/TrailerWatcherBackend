@@ -9,6 +9,7 @@ import { FamousReviewModule } from './modules/famous-review/famous-review.module
 import { GenresModule } from './modules/genres/genre.module';
 import { ReleaseInfoModule } from './modules/release-info/release-info.module';
 import { TrailersModule } from './modules/trailers/trailer.module';
+import { UsersModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { TrailersModule } from './modules/trailers/trailer.module';
     GenresModule,
     ReleaseInfoModule,
     TrailersModule,
+    UsersModule
   ],
   controllers: [],
   providers: [],
